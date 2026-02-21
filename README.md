@@ -1,6 +1,6 @@
 # React Ecommerce Store
 
-🌍 **Live Demo:** https://react-ecommerce-store-theta.vercel.app/
+🌍 **Live Demo:** https://react-products-page.vercel.app/
 
 A modern ecommerce frontend built using **React**, **Tailwind CSS**, and **shadcn/ui**.  
 This project demonstrates product listing, a detailed product view, and a fully functional cart system using the Context API.
