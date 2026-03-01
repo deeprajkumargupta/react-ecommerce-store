@@ -11,15 +11,18 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../features/cart/cartSlice";
 
 function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const { addToCart } = useContext(CartContext);
+  // const { addToCart } = useContext(CartContext);
   const [added, setAdded] = useState(false);
+  const dispatch = useDispatch();
 
   const handleAdd = () => {
-    addToCart(product);
+    dispatch(addToCart(product));
     setAdded(true);
     setTimeout(() => setAdded(false), 1000);
   };
@@ -56,8 +59,8 @@ function ProductDetails() {
             </CarouselContent>
             {product.images.length > 1 && (
               <>
-                <CarouselPrevious className="left-4"/>
-                <CarouselNext className="right-4"/>
+                <CarouselPrevious className="left-4" />
+                <CarouselNext className="right-4" />
               </>
             )}
           </Carousel>

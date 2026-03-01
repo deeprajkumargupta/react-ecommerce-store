@@ -1,8 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
+// import { useContext } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useDispatch } from "react-redux";
+import {
+  removeFromCart,
+  increaseQuantity,
+  decreaseQuantity,
+} from "../features/cart/cartSlice";
 
-function CartItemCard({item, removeFromCart, decreaseQuantity, increaseQuantity}) {
+function CartItemCard({ item }) {
+  const dispatch = useDispatch();
 
   return (
     <Card key={item.id}>
@@ -21,7 +29,7 @@ function CartItemCard({item, removeFromCart, decreaseQuantity, increaseQuantity}
               size="icon"
               variant="outline"
               onClick={(e) => {
-                decreaseQuantity(item.id);
+                dispatch(decreaseQuantity(item.id));
               }}
             >
               -
@@ -31,7 +39,7 @@ function CartItemCard({item, removeFromCart, decreaseQuantity, increaseQuantity}
               size="icon"
               variant="outline"
               onClick={() => {
-                increaseQuantity(item.id);
+                dispatch(increaseQuantity(item.id));
               }}
             >
               +
@@ -43,7 +51,7 @@ function CartItemCard({item, removeFromCart, decreaseQuantity, increaseQuantity}
           variant="destructive"
           className="w-full sm:w-auto"
           onClick={() => {
-            removeFromCart(item.id);
+            dispatch(removeFromCart(item.id));
           }}
         >
           Remove
