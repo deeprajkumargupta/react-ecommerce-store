@@ -1,13 +1,19 @@
 import React, { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+// import { CartContext } from "../context/CartContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import CartItemCard from "@/components/CartItemCard";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  removeFromCart,
+  increaseQuantity,
+  decreaseQuantity,
+} from "../features/cart/cartSlice";
 
 function Cart() {
-  const { cart, removeFromCart, decreaseQuantity, increaseQuantity } =
-    useContext(CartContext);
+  // const { cart, removeFromCart, decreaseQuantity, increaseQuantity } = useContext(CartContext);
+  const cart = useSelector((state) => state.cart.cartItems);
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -22,7 +28,10 @@ function Cart() {
         {/* ///////////////////// */}
         <div className="md:col-span-2 space-y-6">
           {cart.map((item) => (
-            <CartItemCard key={item.id} item={item} removeFromCart={removeFromCart} decreaseQuantity={decreaseQuantity} increaseQuantity={increaseQuantity}/>
+            <CartItemCard
+              key={item.id}
+              item={item}
+            />
           ))}
         </div>
 
@@ -49,6 +58,7 @@ function Cart() {
                 <span>Total</span>
                 <span>${total.toFixed(2)}</span>
               </div>
+              
               <Button className="w-full" size="lg">
                 Proceed to Checkout
               </Button>
